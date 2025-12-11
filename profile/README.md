@@ -69,6 +69,33 @@ conduit issues list
 conduit prs review
 ```
 
+## Package APIs
+
+All packages follow Taylor Otwell's expressive design philosophy:
+
+```php
+// Pull Requests
+PullRequests::for('owner/repo')->open()->get();
+$pr = PullRequests::find('owner/repo', 123);
+$pr->approve('LGTM!')->merge('squash');
+
+// Commits
+Commits::query()
+    ->repository('owner/repo')
+    ->author('username')
+    ->since('2025-01-01')
+    ->get();
+
+// Actions
+Actions::for('owner/repo')->runs()->get();
+Actions::for('owner/repo')->run(123)->rerun();
+
+// Repositories
+Repos::forOrg('laravel')->get();
+$repo = Repos::find('laravel/framework');
+$repo->branches();
+```
+
 ## Contributing
 
 Conduit is in active development. Check the [issues](https://github.com/conduit-ui/conduit/issues) for ways to contribute:
